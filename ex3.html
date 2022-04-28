@@ -3,7 +3,7 @@
   <head>
     <title>WEB1 - JavaScript</title>
     <meta charset="utf-8">
-    <style media="screen">
+    <style>
       .js {
         font-weight: bold;
         color: red;
@@ -17,10 +17,43 @@
         color: green;
       }
     </style>
+
+    <script>
+        function BodySetColor(color) {
+          var alist = document.querySelectorAll('a');
+          var i=0;
+          while(i<alist.length){
+              alist[i].style.color = color;
+              i=i+1;
+          }
+        }
+        function LinksSetColor(color) {
+          document.querySelector('body').style.color = color;
+        }
+        function BodySetBackgroundColor(color){
+          document.querySelector('body').style.backgroundColor = color;
+        }
+        function nightDayHandler(self) {
+          var target = document.querySelector('body');
+          if (self.value==='night') {
+            BodySetBackgroundColor('black');
+            LinksSetColor('white');
+            self.value = 'day';
+
+            BodySetColor('powderblue')
+          } else {
+            BodySetBackgroundColor('white');
+            LinksSetColor('black')
+            self.value = 'night';
+
+            BodySetColor('blue')
+          }
+        }
+    </script>
   </head>
   <body>
     <h1><A href="index.html">WEB</a></h1>
-      <!--
+      <!-- 자바스크립트 사용
       <input type="button" name="night" value="night" onclick="
       document.querySelector('body').style.backgroundColor = 'black';
       document.querySelector('body').style.color = 'white';
@@ -28,8 +61,9 @@
       <input type="button" name="day" value="day" onclick="
       document.querySelector('body').style.backgroundColor = 'white';
       document.querySelector('body').style.color = 'black';
-      "> -->
-
+      ">
+      -->
+      <!-- 조건문 반복문 사용
       <input id="night_day" type="button" value="night" onclick="
           if (document.querySelector('#night_day').value==='night') {
             document.querySelector('body').style.backgroundColor = 'black';
@@ -55,7 +89,36 @@
             }
           }
       ">
+      -->
+      <!--리팩터링 진행
+      <input type="button" value="night" onclick="
+          var target = document.querySelector('body');
+          if (this.value==='night') {
+            target.style.backgroundColor = 'black';
+            target.style.color = 'white';
+            this.value = 'day';
 
+            var alist = document.querySelectorAll('a');
+            var i=0;
+            while(i<alist.length){
+                alist[i].style.color = 'powderblue';
+                i=i+1;
+            }
+          } else {
+            target.style.backgroundColor = 'white';
+            target.style.color = 'black';
+            this.value = 'night';
+
+            var alist = document.querySelectorAll('a');
+            var i=0;
+            while(i<alist.length){
+                alist[i].style.color = 'blue';
+                i=i+1;
+            }
+          }
+      ">
+      -->
+      <input type="button" value="night" onclick="nightDayHandler(this)">
       <ol>
         <li><A href="1.html">A</a></li>
         <li><A href="2.html">B</a></li>
@@ -72,32 +135,5 @@
         It is multi-paradigm, supporting event-driven, functional, and imperative programming styles.
         It has application programming interfaces (APIs) for working with text, dates, regular expressions,
         standard data structures, and the Document Object Model (DOM).</P>
-
-        <input type="button" value="night" onclick="
-            var target = document.querySelector('body');
-            if (this.value==='night') {
-              target.style.backgroundColor = 'black';
-              target.style.color = 'white';
-              this.value = 'day';
-
-              var alist = document.querySelectorAll('a');
-              var i=0;
-              while(i<alist.length){
-                  alist[i].style.color = 'powderblue';
-                  i=i+1;
-              }
-            } else {
-              target.style.backgroundColor = 'white';
-              target.style.color = 'black';
-              this.value = 'night';
-
-              var alist = document.querySelectorAll('a');
-              var i=0;
-              while(i<alist.length){
-                  alist[i].style.color = 'blue';
-                  i=i+1;
-              }
-            }
-        ">
   </body>
 </html>
